@@ -1,7 +1,7 @@
 import { apiAnalisisSentimientos } from "../apis/api-analisis-sentimientos.js";
 
 
-export const showUI = async (req, res) => {
+export const showUI = async (_, res) => {
   res.render('sentimientos/index',{ analysisResult: null });
 };
 

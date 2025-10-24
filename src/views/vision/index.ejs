@@ -1,19 +1,55 @@
 <%- include('../partials/header.ejs') %>
 
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8 text-center">
-          <h2 class=" mb-4">Inserta la URL de alguna imagen <i class="fa-solid fa-eye mb-3"></i></h2>
-          <p class="mb-5">Este servicio todavia no admite la carga de archivos</p>
-          <form class="newsletter-form">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control form-control-lg" placeholder="Ingresa la URL de la imagen">
-              <button class="btn btn-primary btn-lg" type="submit">Enviar</button>
-            </div>
-          </form>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 text-center">
+      <h2 class="mb-4">Inserta la URL de alguna imagen <i class="fa-solid fa-eye mb-3"></i></h2>
+      <p class="mb-5">Este servicio todavía no admite la carga de archivos</p>
+
+      <form class="newsletter-form" action="/vision/analisis" method="POST">
+        <div class="input-group mb-3">
+          <input name="urlText" type="text" class="form-control form-control-lg" placeholder="Ingresa la URL de la imagen" required>
+          <button class="btn btn-primary btn-lg" type="submit">Enviar</button>
         </div>
-      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Resultado del OCR -->
+<% if (analysisResult) { %>
+  <div class="container mt-5">
+    <div class="text-center mb-4">
+      <h3>Resultado del análisis OCR:</h3>
+      <p><strong>Versión del modelo:</strong> <%= analysisResult.modelVersion %></p>
+      <p><strong>Dimensiones de la imagen:</strong> 
+        <%= analysisResult.metadata.width %> × <%= analysisResult.metadata.height %> px
+      </p>
     </div>
 
+    <h5 class="text-center mb-3">Texto detectado:</h5>
 
-  <%- include('../partials/footer') %>
+    <% analysisResult.readResult.blocks.forEach(block => { %>
+      <% block.lines.forEach(line => { %>
+        <div class="card mb-3 shadow-sm">
+          <div class="card-body">
+            <p class="card-text"><strong>Texto:</strong> "<%= line.text %>"</p>
+
+            <% if (line.words && line.words.length > 0) { %>
+              <ul class="list-group list-group-flush">
+                <% line.words.forEach(word => { %>
+                  <li class="list-group-item">
+                    <span><%= word.text %></span> 
+                    <small class="text-muted">(confianza: <%= (word.confidence * 100).toFixed(1) %>%)</small>
+                  </li>
+                <% }) %>
+              </ul>
+            <% } %>
+          </div>
+        </div>
+      <% }) %>
+    <% }) %>
+  </div>
+<% } %>
+
+<%- include('../partials/footer') %>
