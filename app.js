@@ -1,10 +1,10 @@
 import express from 'express';
-//import categoryRouter from './src/routes/category.route.js';
 import dotenv from "dotenv";
+dotenv.config();
+
 import sentimientosRouter from './src/routes/sentimientos.route.js';
 import visionRouter from './src/routes/vision.route.js';
 
-dotenv.config();
 const PORT=process.env.PORT;
 
 const app = express();

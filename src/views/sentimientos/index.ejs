@@ -2,11 +2,11 @@
   <div class="container text-center mt-5">
     <h1 class="mb-4">Analisis de sentimientos por texto <i class="fa-solid fa-face-laugh-wink"></i></h1>
 
-    <form >
+    <form action="/sentimientos/analisis" method="POST">
       <div class="row justify-content-center">
         <div class="textarea-wrapper">
           <label class="textarea-label" for="auto-textarea">Dinos como te sientes hoy:</label>
-          <textarea id="auto-textarea" class="auto-expand-textarea" placeholder="Suéltalo todo bro..."
+          <textarea name="userText" id="auto-textarea" class="auto-expand-textarea" placeholder="Suéltalo todo bro..."
             maxlength="500"></textarea>
           <div class="character-count">0/500</div>
         </div>
@@ -15,6 +15,30 @@
     </form>
 
   </div>
+
+  <!-- Resultado -->
+  <% if (analysisResult) { %>
+  <div class="container text-center mt-5">
+    <h3>Resultado del análisis:</h3>
+    <p><strong>Sentimiento general:</strong> <%= analysisResult.results.documents[0].sentiment %></p>
+    <p><strong>Confianza:</strong></p>
+    <ul class="list-unstyled">
+      <li>Positivo: <%= analysisResult.results.documents[0].confidenceScores.positive %></li>
+      <li>Neutral: <%= analysisResult.results.documents[0].confidenceScores.neutral %></li>
+      <li>Negativo: <%= analysisResult.results.documents[0].confidenceScores.negative %></li>
+    </ul>
+
+    <h5>Frases analizadas:</h5>
+    <ul class="list-group mt-3">
+      <% analysisResult.results.documents[0].sentences.forEach(sentence => { %>
+        <li class="list-group-item">
+          <strong><%= sentence.sentiment %></strong> — "<%= sentence.text %>"
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+<% } %>
+
 
 <style>
     .textarea-wrapper {
