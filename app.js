@@ -4,6 +4,7 @@ dotenv.config();
 
 import sentimientosRouter from './src/routes/sentimientos.route.js';
 import visionRouter from './src/routes/vision.route.js';
+import chatRouter from './src/routes/chat.route.js';
 
 const PORT=process.env.PORT;
 
@@ -27,6 +28,7 @@ app.get('/', async (req, res) => {
 
 app.use(sentimientosRouter);
 app.use(visionRouter);
+app.use(chatRouter);
 
 app.listen(PORT, ()=>{
   console.log(`🕺 I'M ALIVE => PORT: ${PORT}`);

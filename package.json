@@ -2,6 +2,7 @@
   "name": "servicios_azure_ia",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "start": "node .",
