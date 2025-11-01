@@ -49,7 +49,7 @@ Antes de comenzar asegúrate de tener instalado:
 
 1.  **Clona el repositorio**
  ```
-git clone https://github.com/DanteLuque/danteluque-serviciosazureianode.git
+git clone https://github.com/DanteLuque/serviciosAzureIANode.git
 cd danteluque-serviciosazureianode
 ```
 2.  **Instala las dependencias**
