@@ -107,6 +107,9 @@ API_KEY_DIRECT_LINE_CHATBOT=tu_clave_direct_line_secret
 4.  Pega esa clave en `API_KEY_DIRECT_LINE_CHATBOT`.
 ![alt text](image-1.png)
 
+5. Debe cargar el bot con las preguntas y respuestas, esto puede encontrarlo en el archivo adjunto `BotMarvelImpl_qnas.xlsx`
+![alt text](image-3.png)
+
 ## ▶️ Ejecución del proyecto
 
 ### En modo desarrollo (con recarga automática)
